@@ -8,59 +8,82 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Vanilla state',
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  int _rating = 0;
 
   @override
   Widget build(BuildContext context) {
+    double _size = 50.0;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Vanilla State Demo'),
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Container(
+              child: IconButton(
+                icon: (_rating >= 1
+                    ? Icon(Icons.star, size: _size,)
+                    : Icon(Icons.star_border, size: _size,)
+                ),
+                color: Colors.indigo[500],
+                iconSize: _size,
+                onPressed: () {
+                  setState(() {
+                    _rating = 1;
+                  });
+                },
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              child: IconButton(
+                icon: (_rating >=2
+                    ? Icon(Icons.star, size: _size,)
+                    : Icon(Icons.star_border, size: _size,)
+                ),
+                color: Colors.indigo[500],
+                iconSize: _size,
+                onPressed: () {
+                  setState(() {
+                    _rating = 2;
+                  });
+                },
+              ),
+            ),
+            Container(
+              child: IconButton(
+                icon: (_rating >=3
+                    ? Icon(Icons.star, size: _size,)
+                    : Icon(Icons.star_border, size: _size,)
+                ),
+                color: Colors.indigo[500],
+                iconSize: _size,
+                onPressed: () {
+                  setState(() {
+                    _rating = 3;
+                  });
+                },
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
