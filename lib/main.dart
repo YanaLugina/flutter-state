@@ -24,6 +24,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _rating = 0;
 
+  void _incrementCounter(int ratLoc) {
+    setState(() {
+      _rating = ratLoc;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double _size = 50.0;
@@ -36,54 +42,41 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              child: IconButton(
-                icon: (_rating >= 1
-                    ? Icon(Icons.star, size: _size,)
-                    : Icon(Icons.star_border, size: _size,)
-                ),
-                color: Colors.indigo[500],
-                iconSize: _size,
-                onPressed: () {
-                  setState(() {
-                    _rating = 1;
-                  });
-                },
-              ),
+            myWidgetStar(
+              _rating,
+              1,
+              _size,
+              _incrementCounter
             ),
-            Container(
-              child: IconButton(
-                icon: (_rating >=2
-                    ? Icon(Icons.star, size: _size,)
-                    : Icon(Icons.star_border, size: _size,)
-                ),
-                color: Colors.indigo[500],
-                iconSize: _size,
-                onPressed: () {
-                  setState(() {
-                    _rating = 2;
-                  });
-                },
-              ),
+            myWidgetStar(
+              _rating,
+              2,
+              _size,
+              _incrementCounter
             ),
-            Container(
-              child: IconButton(
-                icon: (_rating >=3
-                    ? Icon(Icons.star, size: _size,)
-                    : Icon(Icons.star_border, size: _size,)
-                ),
-                color: Colors.indigo[500],
-                iconSize: _size,
-                onPressed: () {
-                  setState(() {
-                    _rating = 3;
-                  });
-                },
-              ),
+            myWidgetStar(
+              _rating,
+              3,
+              _size,
+              _incrementCounter
             ),
           ],
         ),
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+Widget myWidgetStar(int rating, int numLocal, double sizeStar, handleSetState) {
+  return Container(
+    child: IconButton(
+      icon: (rating >= numLocal
+          ? Icon(Icons.star, size: sizeStar,)
+          : Icon(Icons.star_border, size: sizeStar,)
+      ),
+      color: Colors.indigo[500],
+      iconSize: sizeStar,
+      onPressed: () => handleSetState(numLocal),
+    ),
+  );
 }
